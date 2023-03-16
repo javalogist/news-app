@@ -10,9 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.developer.javalogist.model.NewsData
 
 @Composable
-fun DetailScreen(navController: NavHostController? = null) {
+fun DetailScreen(navController: NavHostController? = null,newsData: NewsData? =null) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -25,7 +26,7 @@ fun DetailScreen(navController: NavHostController? = null) {
         Button(onClick = {
             navController?.navigateUp()
         }) {
-            Text(text = "Go Back")
+            Text(text = "Go Back ${newsData?.id}")
         }
     }
 }
