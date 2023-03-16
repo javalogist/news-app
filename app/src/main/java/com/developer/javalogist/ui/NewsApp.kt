@@ -29,7 +29,7 @@ fun Navigation() {
             arguments = listOf(navArgument("newsId") { type = NavType.IntType })
         ) {
             val newsData = MockData.getNews(it.arguments?.getInt("newsId"))
-            DetailScreen(newsData, scrollState)
+            DetailScreen(navController,newsData, scrollState)
         }
     }
 }

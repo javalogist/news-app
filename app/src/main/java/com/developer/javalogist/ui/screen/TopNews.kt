@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.developer.javalogist.model.NewsData
 import com.developer.javalogist.ui.MockData
+import com.developer.javalogist.ui.MockData.getTimeAgo
 import com.developer.javalogist.ui.MockData.topNewsList
 
 @Composable
@@ -61,7 +62,7 @@ fun TopNewsItem(newsData: NewsData = topNewsList[0], onNewsClicked: () -> Unit =
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = newsData.publishedAt,
+                text = MockData.stringToDate(newsData.publishedAt)?.getTimeAgo() ?: "",
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold
             )
