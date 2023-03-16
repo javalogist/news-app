@@ -1,5 +1,6 @@
 package com.developer.javalogist.ui
 
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,6 +18,7 @@ fun NewsApp() {
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val scrollState = rememberScrollState()
     NavHost(navController = navController, startDestination = "TopNews") {
         composable("TopNews") {
             TopNews(navController)
@@ -27,7 +29,7 @@ fun Navigation() {
             arguments = listOf(navArgument("newsId") { type = NavType.IntType })
         ) {
             val newsData = MockData.getNews(it.arguments?.getInt("newsId"))
-            DetailScreen(navController, newsData)
+            DetailScreen(newsData, scrollState)
         }
     }
 }

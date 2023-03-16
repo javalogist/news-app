@@ -1,38 +1,77 @@
 package com.developer.javalogist.ui.screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
+import androidx.compose.ui.unit.dp
+import com.developer.javalogist.R
 import com.developer.javalogist.model.NewsData
+import com.developer.javalogist.ui.MockData
 
 @Composable
-fun DetailScreen(navController: NavHostController? = null,newsData: NewsData? =null) {
+fun DetailScreen(newsData: NewsData, scrollState: ScrollState) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .verticalScroll(scrollState)
     ) {
-        Text(
-            text = "Details Screen",
-            fontWeight = FontWeight.SemiBold
+        Image(
+            painter = painterResource(id = newsData.image),
+            contentDescription = null
         )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            InfoWithIcon(
+                icon = Icons.Default.Edit,
+                info = newsData.author
+            )
 
-        Button(onClick = {
-            navController?.navigateUp()
-        }) {
-            Text(text = "Go Back ${newsData?.id}")
+            InfoWithIcon(
+                icon = Icons.Default.DateRange,
+                info = newsData.publishedAt
+            )
         }
+        Text(text = newsData.title, fontWeight = FontWeight.Bold)
+        Text(text = newsData.description, modifier = Modifier.padding(top = 16.dp))
+    }
+}
+
+@Composable
+fun InfoWithIcon(icon: ImageVector, info: String) {
+    Row {
+        Icon(
+            icon,
+            contentDescription = "Author",
+            modifier = Modifier.padding(end = 8.dp),
+            colorResource(id = R.color.purple_500)
+        )
+        Text(text = info)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
-    DetailScreen()
+    DetailScreen(newsData = MockData.topNewsList[0], rememberScrollState())
 }
