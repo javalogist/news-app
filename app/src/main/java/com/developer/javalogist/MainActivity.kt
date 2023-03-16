@@ -6,7 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.developer.javalogist.ui.NewsApp
 import com.developer.javalogist.ui.theme.NewsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,9 +21,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
+                    NewsApp()
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    NewsAppTheme {
+        NewsApp()
     }
 }
