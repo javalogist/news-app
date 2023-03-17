@@ -41,6 +41,7 @@ fun DetailScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(it)
+                .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
             Image(

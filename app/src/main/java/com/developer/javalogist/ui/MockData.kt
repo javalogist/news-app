@@ -13,7 +13,7 @@ object MockData {
             author = "Raja Razek, CNN",
             title = "'Tiger King' Joe Exotic says he has been diagnosed with aggressive form of prostate cancer - CNN",
             description = "Joseph Maldonado, known as Joe Exotic on the 2020 Netflix docuseries \\\"Tiger King: Murder, Mayhem and Madness,\\\" has been diagnosed with an aggressive form of prostate cancer, according to a letter written by Maldonado.",
-            publishedAt = "2021-11-04T05:35:21Z"
+            publishedAt = "2023-10-16T05:35:21Z"
         ),
         NewsData(
             2,
