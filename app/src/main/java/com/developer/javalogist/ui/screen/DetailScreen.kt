@@ -1,6 +1,5 @@
 package com.developer.javalogist.ui.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -13,22 +12,25 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.developer.javalogist.R
-import com.developer.javalogist.model.NewsData
+import com.developer.javalogist.model.TopNewsArticle
 import com.developer.javalogist.ui.MockData
 import com.developer.javalogist.ui.MockData.getTimeAgo
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
 fun DetailScreen(
     navigationController: NavController? = null,
-    newsData: NewsData,
+    article: TopNewsArticle,
     scrollState: ScrollState
 ) {
     Scaffold(topBar = {
@@ -44,8 +46,9 @@ fun DetailScreen(
                 .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
-            Image(
-                painter = painterResource(id = newsData.image), contentDescription = null
+            CoilImage(
+                imageModel = article.urlToImage,
+                contentScale = ContentScale.Crop,
             )
             Row(
                 modifier = Modifier
@@ -54,16 +57,16 @@ fun DetailScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 InfoWithIcon(
-                    icon = Icons.Default.Edit, info = newsData.author
+                    icon = Icons.Default.Edit, info = article.author ?: "N/A"
                 )
 
                 InfoWithIcon(
                     icon = Icons.Default.DateRange,
-                    info = MockData.stringToDate(newsData.publishedAt)?.getTimeAgo() ?: ""
+                    info = MockData.stringToDate(article.publishedAt)?.getTimeAgo() ?: ""
                 )
             }
-            Text(text = newsData.title, fontWeight = FontWeight.Bold)
-            Text(text = newsData.description, modifier = Modifier.padding(top = 16.dp))
+            Text(text = article.title!!, fontWeight = FontWeight.Bold)
+            Text(text = article.description!!, modifier = Modifier.padding(top = 16.dp))
         }
     }
 }
@@ -94,5 +97,5 @@ fun DetailTopAppBar(onBackPressed: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
-    DetailScreen(newsData = MockData.topNewsList[0], scrollState = rememberScrollState())
+    DetailScreen(article = TopNewsArticle(), scrollState = rememberScrollState())
 }

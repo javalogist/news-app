@@ -115,6 +115,6 @@ object MockData {
 
     }
 
-    fun stringToDate(publishedAt: String): Date? =
+    fun stringToDate(publishedAt: String?): Date? =
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH).parse(publishedAt)
 }

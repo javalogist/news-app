@@ -1,6 +1,6 @@
 package com.developer.javalogist.ui.screen
 
-import androidx.compose.foundation.Image
+import com.developer.javalogist.R
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,27 +12,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.developer.javalogist.model.NewsData
+import com.developer.javalogist.model.TopNewsArticle
 import com.developer.javalogist.ui.MockData
 import com.developer.javalogist.ui.MockData.getTimeAgo
 import com.developer.javalogist.ui.MockData.topNewsList
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun TopNews(navHostController: NavHostController?) {
+fun TopNews(navHostController: NavHostController?, newsArticles: List<TopNewsArticle>? = null) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LazyColumn {
-            items(MockData.topNewsList) {
-                TopNewsItem(it) {
-                    navHostController?.navigate("DetailScreen/${it.id}")
+        newsArticles?.let {
+            LazyColumn {
+                items(it.size) {
+                    TopNewsItem(newsArticles[it]) {
+                        navHostController?.navigate("DetailScreen/${it}")
+                    }
                 }
             }
         }
@@ -40,7 +46,7 @@ fun TopNews(navHostController: NavHostController?) {
 }
 
 @Composable
-fun TopNewsItem(newsData: NewsData = topNewsList[0], onNewsClicked: () -> Unit = {}) {
+fun TopNewsItem(article: TopNewsArticle, onNewsClicked: () -> Unit = {}) {
     Box(
         modifier = Modifier
             .height(200.dp)
@@ -49,10 +55,9 @@ fun TopNewsItem(newsData: NewsData = topNewsList[0], onNewsClicked: () -> Unit =
                 onNewsClicked()
             }
     ) {
-        Image(
-            painter = painterResource(id = newsData.image),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds
+        CoilImage(
+            imageModel = article.urlToImage,
+            contentScale = ContentScale.Crop,
         )
 
         Column(
@@ -62,15 +67,15 @@ fun TopNewsItem(newsData: NewsData = topNewsList[0], onNewsClicked: () -> Unit =
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = MockData.stringToDate(newsData.publishedAt)?.getTimeAgo() ?: "",
-                color = Color.Black,
+                text = MockData.stringToDate(article.publishedAt)?.getTimeAgo() ?: "",
+                color = Color.White,
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(80.dp))
 
             Text(
-                text = newsData.title,
-                color = Color.Black,
+                text = article.title ?: "",
+                color = Color.White,
                 fontWeight = FontWeight.SemiBold
             )
         }
@@ -86,5 +91,5 @@ fun TopNewsPreview() {
 @Preview(showBackground = true)
 @Composable
 fun TopNewsItemPreview() {
-    TopNewsItem()
+    TopNewsItem(TopNewsArticle())
 }
