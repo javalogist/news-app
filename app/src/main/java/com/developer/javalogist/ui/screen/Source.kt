@@ -119,7 +119,7 @@ fun SourceContent(articles: List<TopNewsArticle>, paddingValues: PaddingValues? 
                         elevation = 6.dp
                     ) {
                         ClickableText(text = annotatedString,
-                            modifier = Modifier.padding(08.dp),
+                            modifier = Modifier.padding(8.dp),
                             onClick = {
                                 annotatedString.getStringAnnotations(it, it).firstOrNull()
                                     ?.let { result ->
