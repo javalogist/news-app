@@ -77,8 +77,11 @@ fun NavGraphBuilder.bottomNavigation(
     }
 
     composable(BottomMenuScreen.Categories.route) {
+        newsManager.onSelectedCategoryChanged("business")
+        newsManager.getArticlesByCategory("business")
         Categories(newsManager) {
             newsManager.onSelectedCategoryChanged(it)
+            newsManager.getArticlesByCategory(it)
         }
     }
     composable(BottomMenuScreen.Sources.route) {

@@ -39,6 +39,7 @@ fun Categories(newsManager: NewsManager, onFetchCategory: (String) -> Unit = {})
                 )
             }
         }
+        ArticleContent(articles = newsManager.getArticleByCategory.value.articles ?: listOf())
     }
 }
 
