@@ -1,6 +1,5 @@
 package com.developer.javalogist.ui
 
-import android.media.Image
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.Home

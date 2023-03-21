@@ -29,7 +29,7 @@ class NewsManager {
     }
 
     private fun getArticles() {
-        val service = Api.newsService.getTopArticles("us", API_KEY)
+        val service = Api.newsService.getTopArticles("us")
         service.enqueue(object : Callback<TopNewsResponse> {
             override fun onResponse(
                 call: Call<TopNewsResponse>,
@@ -51,7 +51,7 @@ class NewsManager {
     }
 
     fun getArticlesByCategory(categoryName: String){
-        val service = Api.newsService.getArticlesByCategory(categoryName, API_KEY)
+        val service = Api.newsService.getArticlesByCategory(categoryName)
         service.enqueue(object : Callback<TopNewsResponse> {
             override fun onResponse(
                 call: Call<TopNewsResponse>,
