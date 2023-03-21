@@ -11,7 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object Api {
     private const val BASE_URL = "https://newsapi.org/v2/"
 
-    val logging = HttpLoggingInterceptor()
+    private val logging = HttpLoggingInterceptor()
 
     private val httpClient = OkHttpClient.Builder()
         .apply {
