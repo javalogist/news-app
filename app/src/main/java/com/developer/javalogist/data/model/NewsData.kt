@@ -1,4 +1,4 @@
-package com.developer.javalogist.model
+package com.developer.javalogist.data.model
 
 import com.developer.javalogist.R
 

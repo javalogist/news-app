@@ -13,7 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.developer.javalogist.components.BottomMenu
-import com.developer.javalogist.model.TopNewsArticle
+import com.developer.javalogist.data.model.TopNewsArticle
+import com.developer.javalogist.network.Api
 import com.developer.javalogist.network.NewsManager
 import com.developer.javalogist.ui.screen.Categories
 import com.developer.javalogist.ui.screen.DetailScreen
@@ -21,18 +22,22 @@ import com.developer.javalogist.ui.screen.Sources
 import com.developer.javalogist.ui.screen.TopNews
 
 @Composable
-fun NewsApp() {
+fun NewsApp(mainViewModel: MainViewModel) {
     val navController = rememberNavController()
     val scrollState = rememberScrollState()
-    MainScreen(navController = navController, scrollState = scrollState)
+    MainScreen(navController = navController, scrollState = scrollState, mainViewModel)
 }
 
 @Composable
-fun MainScreen(navController: NavHostController, scrollState: ScrollState) {
+fun MainScreen(
+    navController: NavHostController,
+    scrollState: ScrollState,
+    mainViewModel: MainViewModel
+) {
     Scaffold(
         bottomBar = { BottomMenu(navController = navController) }
     ) {
-        Navigation(navController, scrollState, it)
+        Navigation(navController, scrollState, it, mainViewModel)
     }
 }
 
@@ -41,7 +46,8 @@ fun Navigation(
     navController: NavHostController,
     scrollState: ScrollState,
     paddingValues: PaddingValues,
-    newsManager: NewsManager = NewsManager(),
+    mainViewModel: MainViewModel,
+    newsManager: NewsManager = NewsManager(Api.newsService)
 ) {
 
     val articles = mutableListOf<TopNewsArticle>()
@@ -85,10 +91,10 @@ fun NavGraphBuilder.bottomNavigation(
 
     composable(BottomMenuScreen.Categories.route) {
         newsManager.onSelectedCategoryChanged("business")
-        newsManager.getArticlesByCategory("business")
+        //newsManager.getArticlesByCategory("business")
         Categories(newsManager) {
             newsManager.onSelectedCategoryChanged(it)
-            newsManager.getArticlesByCategory(it)
+            //newsManager.getArticlesByCategory(it)
         }
     }
     composable(BottomMenuScreen.Sources.route) {

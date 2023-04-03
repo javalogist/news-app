@@ -1,6 +1,6 @@
-package com.developer.javalogist.model
+package com.developer.javalogist.data.model
 
-import com.developer.javalogist.model.ArticleCategory.*
+import com.developer.javalogist.data.model.ArticleCategory.*
 
 enum class ArticleCategory(
     val categoryName: String

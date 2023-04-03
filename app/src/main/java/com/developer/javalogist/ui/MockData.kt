@@ -2,7 +2,7 @@ package com.developer.javalogist.ui
 
 import android.os.Build
 import com.developer.javalogist.R
-import com.developer.javalogist.model.NewsData
+import com.developer.javalogist.data.model.NewsData
 import java.text.SimpleDateFormat
 import java.util.*
 

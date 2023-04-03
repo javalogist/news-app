@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.developer.javalogist.R
-import com.developer.javalogist.model.TopNewsArticle
+import com.developer.javalogist.data.model.TopNewsArticle
 import com.developer.javalogist.ui.MockData
 import com.developer.javalogist.ui.MockData.getTimeAgo
 import com.skydoves.landscapist.coil.CoilImage

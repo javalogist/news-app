@@ -19,8 +19,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.developer.javalogist.R
-import com.developer.javalogist.model.TopNewsArticle
-import com.developer.javalogist.model.getAllArticleCategory
+import com.developer.javalogist.data.model.TopNewsArticle
+import com.developer.javalogist.data.model.getAllArticleCategory
 import com.developer.javalogist.network.NewsManager
 import com.developer.javalogist.ui.MockData
 import com.developer.javalogist.ui.MockData.getTimeAgo
